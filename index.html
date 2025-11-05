@@ -12,23 +12,32 @@ html,body{
   overflow-x:hidden;
 }
 h1{margin-top:4vh;font-weight:400;letter-spacing:.06em;}
+#container{position:relative;width:100%;height:140px;}
 #smoke{
-  display:block;margin:6vh auto 0 auto;
+  display:block;margin:0 auto;
   font-size:6vw;
   animation:glow 6s ease-in-out infinite;
   transform-origin:center;
   cursor:pointer;
+  position:relative;
+  z-index:2;
 }
 @keyframes glow{
   0%,100%{opacity:.9;filter:brightness(1);}
   50%{opacity:1;filter:brightness(1.25);}
 }
-#smoke.active{
-  filter:brightness(1.6) drop-shadow(0 0 15px rgba(150,150,150,0.6));
+.smoke-puff{
+  position:absolute;left:50%;top:50%;
+  width:20px;height:20px;background:rgba(150,150,150,0.3);
+  border-radius:50%;opacity:0;pointer-events:none;
+  animation:puff 3s ease-out forwards;
 }
-main{
-  margin:0 auto;width:90%;max-width:600px;padding-bottom:8vh;
+@keyframes puff{
+  0%{transform:translate(-50%,0) scale(1);opacity:.4;}
+  70%{transform:translate(-50%,-80px) scale(2);opacity:.15;}
+  100%{transform:translate(-50%,-120px) scale(2.5);opacity:0;}
 }
+main{margin:0 auto;width:90%;max-width:600px;padding-bottom:8vh;}
 p{line-height:1.55em;margin:1em 0;}
 .helper{font-size:.9em;opacity:.7;margin-top:-0.4em;}
 section.help{
@@ -44,11 +53,7 @@ section.help{
 }
 section.help summary{cursor:pointer;font-weight:600;letter-spacing:.03em;}
 section.help p{margin:.4em 0;}
-#footer{
-  text-align:center;font-size:.8em;opacity:.6;
-  line-height:1.6em;margin:3em auto 2em;
-  width:90%;max-width:700px;
-}
+#footer{text-align:center;font-size:.8em;opacity:.6;line-height:1.6em;margin:3em auto 2em;width:90%;max-width:700px;}
 #footer a{color:#000;text-decoration:none;opacity:.6;}
 #footer a:hover{opacity:1;}
 #guide{
@@ -67,7 +72,9 @@ section.help p{margin:.4em 0;}
 
 <h1>💨 royke.plnt.earth — Røyk</h1>
 
-<div id="smoke" title="Trykk for å høre tonen / Click to hear the tone">💨</div>
+<div id="container">
+  <div id="smoke" title="Trykk for å høre tonen / Click to hear the tone">💨</div>
+</div>
 
 <main>
   <p><strong>Røyk er luftens minne om ild.</strong></p>
@@ -117,32 +124,42 @@ section.help p{margin:.4em 0;}
 </div>
 
 <script>
-/* Short tone: 288 → 384 Hz glide */
-let ctx, osc, gain;
+/* Short tone with smoke animation */
+let ctx;
+const container = document.getElementById('container');
 const smokeIcon = document.getElementById('smoke');
 
 function playTone(){
-  if(!ctx){
-    ctx = new (window.AudioContext || window.webkitAudioContext)();
-  }
-  const duration = 3; // seconds
-  const startFreq = 288, endFreq = 384;
-  osc = ctx.createOscillator();
-  gain = ctx.createGain();
+  if(!ctx){ ctx = new (window.AudioContext || window.webkitAudioContext)(); }
+  const duration=3,startFreq=288,endFreq=384;
+  const osc=ctx.createOscillator();
+  const gain=ctx.createGain();
   osc.type='sine';
-  osc.frequency.setValueAtTime(startFreq, ctx.currentTime);
-  osc.frequency.linearRampToValueAtTime(endFreq, ctx.currentTime+duration);
-  gain.gain.setValueAtTime(0.05, ctx.currentTime);
-  gain.gain.linearRampToValueAtTime(0, ctx.currentTime+duration);
+  osc.frequency.setValueAtTime(startFreq,ctx.currentTime);
+  osc.frequency.linearRampToValueAtTime(endFreq,ctx.currentTime+duration);
+  gain.gain.setValueAtTime(0.05,ctx.currentTime);
+  gain.gain.linearRampToValueAtTime(0,ctx.currentTime+duration);
   osc.connect(gain).connect(ctx.destination);
-  osc.start();
-  osc.stop(ctx.currentTime+duration);
+  osc.start(); osc.stop(ctx.currentTime+duration);
 }
 
-smokeIcon.addEventListener('click', ()=>{
+function makePuff(){
+  const puff=document.createElement('div');
+  puff.classList.add('smoke-puff');
+  puff.style.left='50%';
+  puff.style.top='50%';
+  puff.style.width=20+Math.random()*15+'px';
+  puff.style.height=puff.style.width;
+  puff.style.animationDelay=(Math.random()*0.2)+'s';
+  container.appendChild(puff);
+  setTimeout(()=>puff.remove(),3000);
+}
+
+smokeIcon.addEventListener('click',()=>{
   playTone();
   smokeIcon.classList.add('active');
-  setTimeout(()=>smokeIcon.classList.remove('active'), 3200);
+  for(let i=0;i<6;i++){setTimeout(makePuff,i*200);}
+  setTimeout(()=>smokeIcon.classList.remove('active'),3200);
 });
 </script>
 
