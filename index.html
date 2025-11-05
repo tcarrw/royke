@@ -3,30 +3,31 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>fjaere.plnt.earth — Fjære / Ebb Tide</title>
+<title>royke.plnt.earth — Røyk / Smoke</title>
 <style>
 html,body{
   margin:0;
-  background:radial-gradient(circle at 50% 45%, #f3faff 0%, #d8ecf5 60%, #ffffff 100%);
+  background:radial-gradient(circle at 50% 45%, #f5f5f5 0%, #e7e2e2 50%, #ffffff 100%);
   font-family:'Segoe UI',sans-serif;color:#000;text-align:center;
   overflow-x:hidden;
 }
 h1{margin-top:4vh;font-weight:400;letter-spacing:.06em;}
-#tide{
+#smoke{
   display:block;margin:6vh auto 0 auto;
   font-size:6vw;
   animation:glow 6s ease-in-out infinite;
   transform-origin:center;
+  cursor:pointer;
 }
 @keyframes glow{
   0%,100%{opacity:.9;filter:brightness(1);}
   50%{opacity:1;filter:brightness(1.25);}
 }
+#smoke.active{
+  filter:brightness(1.6) drop-shadow(0 0 15px rgba(150,150,150,0.6));
+}
 main{
-  margin:0 auto;
-  width:90%;
-  max-width:600px;
-  padding-bottom:8vh;
+  margin:0 auto;width:90%;max-width:600px;padding-bottom:8vh;
 }
 p{line-height:1.55em;margin:1em 0;}
 .helper{font-size:.9em;opacity:.7;margin-top:-0.4em;}
@@ -44,57 +45,106 @@ section.help{
 section.help summary{cursor:pointer;font-weight:600;letter-spacing:.03em;}
 section.help p{margin:.4em 0;}
 #footer{
-  text-align:center;
-  font-size:.8em;
-  opacity:.6;
-  line-height:1.6em;
-  margin:3em auto 2em;
-  width:90%;
-  max-width:700px;
+  text-align:center;font-size:.8em;opacity:.6;
+  line-height:1.6em;margin:3em auto 2em;
+  width:90%;max-width:700px;
 }
 #footer a{color:#000;text-decoration:none;opacity:.6;}
 #footer a:hover{opacity:1;}
+#guide{
+  background:rgba(255,255,255,0.65);
+  backdrop-filter:blur(6px);
+  padding:18px 24px;border-radius:10px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.05);
+  font-size:0.9em;line-height:1.5em;
+  margin:1.6em auto;text-align:left;
+  width:90%;max-width:540px;
+}
+#guide h2{text-align:center;font-weight:500;margin-top:0;}
 </style>
 </head>
 <body>
 
-<h1>🌊 fjaere.plnt.earth — Fjære</h1>
+<h1>💨 royke.plnt.earth — Røyk</h1>
 
-<div id="tide">🌊</div>
+<div id="smoke" title="Trykk for å høre tonen / Click to hear the tone">💨</div>
 
 <main>
-  <p><strong>Fjære er når havet trekker seg tilbake.</strong></p>
-  <p class="helper">(FYAH-reh air nahr HAH-veht TREK-ker say tah-BAH-keh.)<br/>
-  Ebb tide is when the sea pulls back.</p>
+  <p><strong>Røyk er luftens minne om ild.</strong></p>
+  <p class="helper">(RUH-yuhk air LOOF-tens MIN-neh om EELD.)<br/>
+  Smoke is the air’s memory of fire.</p>
 
-  <p><strong>Vannet forsvinner ikke, det hviler.</strong></p>
-  <p class="helper">(VAH-net for-SVIN-ner EE-keh, deh HVEEL-er.)<br/>
-  The water does not disappear, it rests.</p>
+  <p><strong>Det som brenner, lærer luften å se.</strong></p>
+  <p class="helper">(Deh som BREHN-ner, LAIR-er LOOF-ten aw SEH.)<br/>
+  What burns teaches the air to see.</p>
 
-  <p><strong>Når stranden puster, viser den alt som har vært skjult.</strong></p>
-  <p class="helper">(Nuhr STRAN-den POOS-ter, VEE-ser den alt som har vehrt shyoolt.)<br/>
-  When the beach breathes, it shows everything that was hidden.</p>
+  <p><strong>Røyk stiger stille, men sier alt.</strong></p>
+  <p class="helper">(RUH-yuhk STEE-ger STEEL-leh, men SEE-er alt.)<br/>
+  Smoke rises quietly, but says everything.</p>
 
-  <p><em>Fjære minner oss om at å trekke seg tilbake er å samle kraft.</em></p>
-  <p class="helper">(FYAH-reh MIN-ner oss om at oh TREK-keh say tah-BAH-keh air oh SAM-leh kraft.)<br/>
-  Ebb tide reminds us that to pull back is to gather strength.</p>
+  <p><em>Røyk minner oss om forvandling — det synlige sporet av varme som har delt seg med himmelen.</em></p>
+  <p class="helper">(RUH-yuhk MIN-ner oss om for-VAHN-ling — deh SEEN-lee-eh SPO-ret av VAR-meh som har dehlt say med HIM-meh-len.)<br/>
+  Smoke reminds us of transformation — the visible trace of warmth shared with the sky.</p>
+
+  <div id="guide">
+    <h2>🎧 Pusteguide / Breath Guide</h2>
+    <p>
+      Trykk på røyk-ikonet for å høre en kort tone (288 → 384 Hz).  
+      Lukk øynene. Trekk pusten dypt mens tonen stiger, pust ut mens den faller.  
+      Se for deg at røyk stiger og løser seg i lufta.
+    </p>
+    <p><em>Click the smoke icon to hear a short tone (288 → 384 Hz).  
+      Inhale as the tone rises, exhale as it fades.  
+      Imagine smoke lifting and dissolving into the air.</em></p>
+  </div>
 </main>
 
 <section class="help">
   <details open>
     <summary>🗣️ Uttalehjelp / Pronunciation Help</summary>
-    <p><strong>fjære</strong> — <em>FYAH-reh</em> → ebb tide, retreat, exhale of the sea</p>
-    <p><strong>vann</strong> — <em>VAHN</em> → water</p>
-    <p><strong>strand</strong> — <em>STRAND</em> → beach</p>
-    <p><strong>hvile</strong> — <em>HVEEL-eh</em> → to rest</p>
+    <p><strong>røyk</strong> — <em>RUH-yuhk</em> → smoke, the air’s memory of fire</p>
+    <p><strong>ild</strong> — <em>EELD</em> → fire</p>
+    <p><strong>luft</strong> — <em>LOOFT</em> → air</p>
+    <p><strong>forvandling</strong> — <em>for-VAHN-ling</em> → transformation</p>
   </details>
 </section>
 
 <div id="footer">
   <a href="https://center.plnt.earth">← Tilbake til Center</a> • 
-  <a href="https://royke.plnt.earth">Neste Domene — Røyk / Smoke</a> • 
+  <a href="https://fjaere.plnt.earth">Forrige Domene — Fjære / Ebb Tide</a> • 
+  <a href="https://lysning.plnt.earth">Neste Domene — Lysning / Clearing</a> • 
   <a href="https://illumina.plnt.earth">Illumina-arkiv</a>
 </div>
+
+<script>
+/* Short tone: 288 → 384 Hz glide */
+let ctx, osc, gain;
+const smokeIcon = document.getElementById('smoke');
+
+function playTone(){
+  if(!ctx){
+    ctx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  const duration = 3; // seconds
+  const startFreq = 288, endFreq = 384;
+  osc = ctx.createOscillator();
+  gain = ctx.createGain();
+  osc.type='sine';
+  osc.frequency.setValueAtTime(startFreq, ctx.currentTime);
+  osc.frequency.linearRampToValueAtTime(endFreq, ctx.currentTime+duration);
+  gain.gain.setValueAtTime(0.05, ctx.currentTime);
+  gain.gain.linearRampToValueAtTime(0, ctx.currentTime+duration);
+  osc.connect(gain).connect(ctx.destination);
+  osc.start();
+  osc.stop(ctx.currentTime+duration);
+}
+
+smokeIcon.addEventListener('click', ()=>{
+  playTone();
+  smokeIcon.classList.add('active');
+  setTimeout(()=>smokeIcon.classList.remove('active'), 3200);
+});
+</script>
 
 </body>
 </html>
